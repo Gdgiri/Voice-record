@@ -78,18 +78,60 @@ function displayRecordings() {
   recordings.forEach((recording, index) => {
     let audioElement = new Audio();
     audioElement.src = recording;
-    audioElement.controls = true;
 
     let recordingDiv = document.createElement("div");
-    recordingDiv.appendChild(audioElement);
+
+    let playButton = document.createElement("button");
+    playButton.textContent = "Play";
+    playButton.addEventListener("click", function () {
+      audioElement.play();
+      playButton.style.display = "none";
+      stopButton.style.display = "inline";
+    });
+
+    let stopButton = document.createElement("button");
+    stopButton.textContent = "Stop";
+    stopButton.style.display = "none";
+    stopButton.addEventListener("click", function () {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+      playButton.style.display = "inline";
+      stopButton.style.display = "none";
+    });
+
+    audioElement.addEventListener("ended", function () {
+      playButton.style.display = "inline";
+      stopButton.style.display = "none";
+    });
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
-    deleteButton.classList = "btn btn-warning delBtn";
     deleteButton.addEventListener("click", function () {
       deleteRecording(index);
     });
 
+    // Create the progress bar
+    let progressBar = document.createElement("input");
+    progressBar.type = "range";
+    progressBar.min = 0;
+    progressBar.max = 100;
+    progressBar.value = 0;
+
+    // Update the progress bar as the audio plays
+    audioElement.addEventListener("timeupdate", function () {
+      let progress = (audioElement.currentTime / audioElement.duration) * 100;
+      progressBar.value = progress;
+    });
+
+    // Allow seeking by clicking on the progress bar
+    progressBar.addEventListener("input", function () {
+      let seekTime = (progressBar.value / 100) * audioElement.duration;
+      audioElement.currentTime = seekTime;
+    });
+
+    recordingDiv.appendChild(playButton);
+    recordingDiv.appendChild(stopButton);
+    recordingDiv.appendChild(progressBar);
     recordingDiv.appendChild(deleteButton);
     savedRecordingsDiv.appendChild(recordingDiv);
   });
