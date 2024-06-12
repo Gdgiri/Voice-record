@@ -83,6 +83,7 @@ function displayRecordings() {
 
     let playButton = document.createElement("button");
     playButton.textContent = "Play";
+    playButton.classList = "btn btn-success";
     playButton.addEventListener("click", function () {
       audioElement.play();
       playButton.style.display = "none";
@@ -92,6 +93,7 @@ function displayRecordings() {
     let stopButton = document.createElement("button");
     stopButton.textContent = "Stop";
     stopButton.style.display = "none";
+    stopButton.classList = "btn btn-danger";
     stopButton.addEventListener("click", function () {
       audioElement.pause();
       audioElement.currentTime = 0;
@@ -106,6 +108,7 @@ function displayRecordings() {
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    deleteButton.classList = "btn btn-warning";
     deleteButton.addEventListener("click", function () {
       deleteRecording(index);
     });
