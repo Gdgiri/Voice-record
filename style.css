@@ -36,3 +36,11 @@ button:hover {
   font-weight: bold;
   margin-top: 10px;
 }
+
+#savedRecordings div {
+  margin-bottom: 10px;
+}
+
+#savedRecordings button {
+  margin-left: 10px;
+}
