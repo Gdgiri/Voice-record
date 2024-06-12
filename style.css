@@ -46,3 +46,7 @@ button:hover {
 #savedRecordings button {
   margin-left: 10px;
 }
+
+.delBtn{
+    margin-bottom: 4%;
+}

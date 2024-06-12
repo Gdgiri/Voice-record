@@ -85,6 +85,7 @@ function displayRecordings() {
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
+    deleteButton.classList = "btn btn-danger delBtn";
     deleteButton.addEventListener("click", function () {
       deleteRecording(index);
     });
